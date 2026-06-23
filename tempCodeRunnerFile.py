@@ -1,0 +1,5 @@
+game.check_win()
+game.check_draw()
+game.end_game()
+game.quit_game()
+game.restart_game()
