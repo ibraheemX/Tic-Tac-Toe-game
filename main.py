@@ -3,7 +3,7 @@ import os
 
 def clear_screen():
 
-    os.system("cls" if os.name == "nt" else "clear")  # nt => windows
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 class Player:
@@ -57,9 +57,6 @@ class Menu:
         choice = input(main_menu_text)
         return choice
 
-# menu=Menu()
-# menu.display_main_menu()
-
     def display_end_menu(self):
         end_menu_text = """
             Game Over!
@@ -85,15 +82,12 @@ class Board:
             if i < 6:
                 print("-"*5)
 
-    # move=input("choose a position to play in : ")
-
     def is_valid_move(self, choice):
 
         if self.board_list[choice-1].isdigit():
 
             return True
 
-# SOLID PRINCIPLES : SINGLE RESPONSIPILITY PRINCIPLE
     def update_board(self, choice, symbol):
 
         if self.is_valid_move(choice):
@@ -141,8 +135,8 @@ class Game_logic:
         while True:
             self.play_turn()
 
-            if self.check_win() or self.check_draw(): 
-                choice=self.menu.display_end_menu()
+            if self.check_win() or self.check_draw():
+                choice = self.menu.display_end_menu()
                 if choice == "1":
                     self.board.reset_board()
                     self.current_player_index = 0
@@ -161,11 +155,11 @@ class Game_logic:
         while True:
             try:
                 cell_choice = int(input(" choose a cell (1-9) : "))
-                if 1 <= cell_choice <=9 and self.board.update_board(cell_choice, player.symbol):
+                if 1 <= cell_choice <= 9 and self.board.update_board(cell_choice, player.symbol):
                     break
 
                 else:
-                
+
                     print("invalid move, try again")
 
             except ValueError:
@@ -187,25 +181,25 @@ class Game_logic:
             if self.board.board_list[combo[0]] == self.board.board_list[combo[1]] == self.board.board_list[combo[2]]:
 
                 clear_screen()
-                print(f"player {self.player[1-self.current_player_index].name} win")
+                print(
+                    f"player {self.player[1-self.current_player_index].name} win")
                 return True
-            
+
         return False
 
     def check_draw(self):
 
-            if all(not cell.isdigit() for cell in self.board.board_list):
-                clear_screen()
-                print ("Draw")
-                return True
-            return False
+        if all(not cell.isdigit() for cell in self.board.board_list):
+            clear_screen()
+            print("Draw")
+            return True
+        return False
 
     def quit_game(self):
 
         print("Thank you for playing")
 
     def restart_game(self):
-
 
         self.board.reset_board()
         self.current_player_index = 0
@@ -214,37 +208,3 @@ class Game_logic:
 
 game = Game_logic()
 game.start_game()
-
-
-
-# example=["a","b","c","d","e","f"]
-
-# for i in range(0,6,3):
-#     print("|".join(example[i:i+3]))
-#     if i<9:
-#         print("-"*5)
-
-
-# # [1,2,3,4,5,6,7,8,9]
-# board_list = [str(i) for i in range(1, 10)]  # list comprehension
-# for i in range(0, 9, 3):
-#     print("|".join(board_list[i:i+3]))
-#     if i < 6:
-#         print("-"*5)
-
-
-# def is_valid_move(self,choice):
-
-#     if board_list[choice-1]==int():
-#         return choice
-
-# def update_board(self, choice, symbol):
-
-#     move=input("choose a position to play in : ")
-
-#     choice-1==symbol
-#     self.board_list[choice-1].replace(str(choice-1),symbol)
-# if  is_valid_move == True:
-#     print(move)
-# else:
-#     print("position has taken")
